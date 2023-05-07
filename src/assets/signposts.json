@@ -1,18 +1,44 @@
 [
   {
-    "name": "Xenoveritas' FFXIV Timers",
-    "link": "https://www.xenoveritas.org/static/ffxiv/timer.html",
-    "tags": ["events", "reset", "housing"]
+    "name": "Xenoveritas' Timers",
+    "link": "https://xenoveritas.org/static/ffxiv/timer.html",
+    "desc": "Countdown timers for weekly reset, daily reset, patches/maintenance and housing lotteries.",
+    "tags": ["events", "weekly", "daily", "housing"]
   },
   {
-    "name": "Garland Tools",
-    "link": "https://www.garlandtools.org/",
-    "tags": ["crafting", "gathering", "fishing", "hunting"]
+    "name": "Garland Data",
+    "link": "https://garlandtools.org/db/",
+    "desc": "Database of every item in the game. Crafting and gathering lists.",
+    "tags": ["crafting", "gathering"]
+  },
+  {
+    "name": "Garland Bell",
+    "link": "https://garlandtools.org/bell/",
+    "desc": "Timers for gathering, big fish, GATEs, and hunt targets.",
+    "tags": ["crafting", "gathering", "fishing", "hunting", "mgp"]
+  },
+  {
+    "name": "FFXIV Fisher",
+    "link": "https://garlandtools.org/ffxivfisher/",
+    "desc": "Weather and time windows for all fish.",
+    "tags": ["fishing"]
   },
   {
     "name": "FFXIV Squadron",
     "link": "https://ffxivsquadron.com/",
     "desc": "Track squadron XP and calculate which recruits can successfully complete a mission.",
     "tags": ["squadrons"]
+  },
+  {
+    "name": "FFX|V Fish Tracker App",
+    "link": "https://ff14fish.carbuncleplushy.com/",
+    "desc": "See when hard-to-catch big fish are available.",
+    "tags": ["fishing"]
+  },
+  {
+    "name": "Console Games Wiki",
+    "link": "https://ffxiv.consolegameswiki.com/wiki/FF14_Wiki",
+    "desc": "Wiki pages on everything",
+    "tags": ["guides"]
   }
 ]

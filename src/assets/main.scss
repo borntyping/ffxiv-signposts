@@ -1,15 +1,15 @@
-$enable-grid-classes: false;
-$enable-cssgrid: true;
-
-@import "bootstrap/scss/bootstrap";
+@charset "utf-8";
+@import "bulma/bulma.sass";
 
 // Images from https://na.finalfantasyxiv.com/a_realm_reborn/world
 // CSS based on https://codepen.io/hteumeuleu/pen/Dqpgey and https://codepen.io/Reignson/pen/ALeMzN.
-.crystals {
-  background:
-    url("https://img.finalfantasyxiv.com/lds/promo/pc/global/images/world/what/crystal_01.png") border-box center repeat-y,
-    url("https://img.finalfantasyxiv.com/lds/promo/pc/global/images/world/what/crystal_02.png") border-box center repeat-y,
-    url("https://img.finalfantasyxiv.com/lds/promo/pc/global/images/world/what/crystal_03.png") border-box center repeat-y,
+:root {
+  background: border-box center repeat-y
+      url("https://img.finalfantasyxiv.com/lds/promo/pc/global/images/world/what/crystal_01.png"),
+    border-box center repeat-y
+      url("https://img.finalfantasyxiv.com/lds/promo/pc/global/images/world/what/crystal_02.png"),
+    border-box center repeat-y
+      url("https://img.finalfantasyxiv.com/lds/promo/pc/global/images/world/what/crystal_03.png"),
     #000000;
 
   animation: background 240s linear infinite;
