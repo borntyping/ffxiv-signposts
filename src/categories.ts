@@ -9,8 +9,13 @@ export default [
     false
   ),
   new Category(
-    "Guides",
-    [new Tag("guides", "Guides")],
+    "Reference",
+    [
+      new Tag("guides", "Guides"),
+      new Tag("database", "Databases"),
+      new Tag("wiki", "Wikis"),
+      new Tag("completion", "Completion"),
+    ],
     ["is-link", "is-light"]
   ),
   new Category(
@@ -38,6 +43,7 @@ export default [
     ["is-success", "is-light"]
   ),
   new Category("Other activities", [
+    new Tag("glamour", "Glamour"),
     new Tag("housing", "Housing"),
     new Tag("mgp", "Golden Saucer"),
   ]),

@@ -39,12 +39,28 @@ const tagsWithClasses = computed(() => {});
         </h4>
         <p class="card-text">{{ signpost.desc }}</p>
       </div>
-      <div class="block tags">
-        <span
-          v-for="({ cssClasses, tagName }, index) in tagsWithClasses"
-          :class="['tag', cssClasses]"
-          >{{ tagName }}</span
-        >
+      <div class="block field is-grouped is-grouped-multiline">
+        <div class="control" v-for="{ cssClasses, tagName } in tagsWithClasses">
+          <span class="tags has-addons">
+            <span :class="['tag', cssClasses]">{{ tagName }}</span>
+          </span>
+        </div>
+        <div class="control" v-for="(value, key) in signpost.meta">
+          <span class="tags has-addons">
+            <span class="tag is-dark">{{ key }}</span>
+            <span
+              :class="[
+                'tag',
+                {
+                  'is-success': value === 'low',
+                  'is-warning': value === 'medium',
+                  'is-danger': value === 'high',
+                },
+              ]"
+              >{{ value }}</span
+            >
+          </span>
+        </div>
       </div>
     </div>
   </div>

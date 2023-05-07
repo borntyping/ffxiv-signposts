@@ -18,7 +18,8 @@ export class Signpost {
     readonly name: string,
     readonly link: string,
     readonly desc: string,
-    readonly tags: string[]
+    readonly tags: string[],
+    readonly meta: Record<string, string>
   ) {
     this.domain = new URL(this.link).hostname;
   }

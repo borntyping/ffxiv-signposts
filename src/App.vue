@@ -1,18 +1,22 @@
 <script lang="ts">
-import {defineComponent} from "vue";
-import {Category, Signpost, Tag} from "@/types";
+import { defineComponent } from "vue";
+import { Category, Signpost, Tag } from "@/types";
 import SignpostCard from "@/components/SignpostCard.vue";
 import CATEGORIES from "@/categories";
 import SIGNPOSTS from "@/signposts";
 
 export default defineComponent({
   data() {
-    const selectedCategoryName = window.sessionStorage.getItem('selectedCategory');
-    const selectedCategory = CATEGORIES.filter(c => c.name === selectedCategoryName)[0] || CATEGORIES[0];
+    const selectedCategoryName =
+      window.sessionStorage.getItem("selectedCategory");
+    const selectedCategory =
+      CATEGORIES.filter((c) => c.name === selectedCategoryName)[0] ||
+      CATEGORIES[0];
 
     const tags = CATEGORIES.map((c) => c.tags).flat();
-    const selectedTagName = window.sessionStorage.getItem('selectedTag');
-    const selectedTag = tags.filter(t => t.name === selectedTagName)[0] || null;
+    const selectedTagName = window.sessionStorage.getItem("selectedTag");
+    const selectedTag =
+      tags.filter((t) => t.name === selectedTagName)[0] || null;
 
     return {
       signposts: SIGNPOSTS.sort(),
@@ -24,11 +28,11 @@ export default defineComponent({
   },
   watch: {
     selectedCategory(value: Category, oldValue) {
-      window.sessionStorage.setItem('selectedCategory', value.name);
+      window.sessionStorage.setItem("selectedCategory", value.name);
     },
     selectedTag(value, oldValue) {
-      window.sessionStorage.setItem('selectedTag', value);
-    }
+      window.sessionStorage.setItem("selectedTag", value);
+    },
   },
   components: {
     SignpostCard,
@@ -49,20 +53,20 @@ export default defineComponent({
       }
 
       console.debug(
-          "Selecting signposts in category",
-          this.selectedCategory!.name
+        "Selecting signposts in category",
+        this.selectedCategory!.name
       );
       let inCategory = this.signposts.filter((s) =>
-          s.hasAnyTag(this.selectedCategory!.tags)
+        s.hasAnyTag(this.selectedCategory!.tags)
       );
 
       if (this.selectedTag === null) {
         return inCategory;
       }
       console.debug(
-          "Selecting signposts in category and tag",
-          this.selectedCategory!.name,
-          this.selectedTag!.name
+        "Selecting signposts in category and tag",
+        this.selectedCategory!.name,
+        this.selectedTag!.name
       );
       return inCategory.filter((s) => s.hasTag(this.selectedTag!));
     },
@@ -75,12 +79,16 @@ export default defineComponent({
     <div class="hero-body">
       <h1 class="title is-1">FFXIV Signposts</h1>
       <p class="subtitle is-5">
-        A list of helpful Final Fantasy 14 sites organised by activity. </p>
+        A list of helpful Final Fantasy 14 sites organised by activity.
+      </p>
     </div>
     <div class="hero-foot">
       <div class="tabs is-boxed is-centered">
         <ul>
-          <li v-for="category in categories.filter((c) => c.display)" :class="{ 'is-active': selectedCategory === category }">
+          <li
+            v-for="category in categories.filter((c) => c.display)"
+            :class="{ 'is-active': selectedCategory === category }"
+          >
             <a @click="selectCategory(category)">{{ category.name }}</a>
           </li>
         </ul>
@@ -91,7 +99,12 @@ export default defineComponent({
     <div class="hero-foot">
       <div class="tabs is-boxed is-centered">
         <ul>
-          <li :key="tag.name" v-for="tag in selectedCategory?.tags" :class="{ 'is-active': selectedTag === tag }" style="margin-top: 0.5em">
+          <li
+            :key="tag.name"
+            v-for="tag in selectedCategory?.tags"
+            :class="{ 'is-active': selectedTag === tag }"
+            style="margin-top: 0.5em"
+          >
             <a @click="selectTag(tag)">{{ tag.name }}</a>
           </li>
         </ul>
@@ -101,8 +114,12 @@ export default defineComponent({
   <main class="section">
     <div class="columns is-multiline is-centered">
       <TransitionGroup name="list">
-        <div :key="signpost.name" class="column is-6-desktop is-4-widescreen is-2-fullhd" v-for="signpost in selectSignposts()">
-          <SignpostCard :signpost="signpost" :categories="categories"/>
+        <div
+          :key="signpost.name"
+          class="column is-6-desktop is-4-widescreen is-2-fullhd"
+          v-for="signpost in selectSignposts()"
+        >
+          <SignpostCard :signpost="signpost" :categories="categories" />
         </div>
       </TransitionGroup>
     </div>
