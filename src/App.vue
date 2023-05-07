@@ -7,13 +7,28 @@ import SIGNPOSTS from "@/signposts";
 
 export default defineComponent({
   data() {
+    const selectedCategoryName = window.sessionStorage.getItem('selectedCategory');
+    const selectedCategory = CATEGORIES.filter(c => c.name === selectedCategoryName)[0] || CATEGORIES[0];
+
+    const tags = CATEGORIES.map((c) => c.tags).flat();
+    const selectedTagName = window.sessionStorage.getItem('selectedTag');
+    const selectedTag = tags.filter(t => t.name === selectedTagName)[0] || null;
+
     return {
       signposts: SIGNPOSTS.sort(),
       categories: CATEGORIES,
-      tags: CATEGORIES.map((c) => c.tags).flat(),
-      selectedCategory: CATEGORIES[0],
-      selectedTag: null as Tag | null,
+      tags: tags,
+      selectedCategory: selectedCategory,
+      selectedTag: selectedTag,
     };
+  },
+  watch: {
+    selectedCategory(value: Category, oldValue) {
+      window.sessionStorage.setItem('selectedCategory', value.name);
+    },
+    selectedTag(value, oldValue) {
+      window.sessionStorage.setItem('selectedTag', value);
+    }
   },
   components: {
     SignpostCard,
