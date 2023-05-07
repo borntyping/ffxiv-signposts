@@ -1,6 +1,6 @@
 <script lang="ts">
-import { computed, defineComponent, PropType } from "vue";
-import { Category, Signpost, Tag } from "@/types";
+import { defineComponent, PropType } from "vue";
+import { Category, Signpost } from "@/types";
 
 export default defineComponent({
   name: "SignpostCard",
@@ -15,16 +15,15 @@ export default defineComponent({
           c.tags
             .filter((t) => this.signpost?.hasTag(t))
             .map((t) => ({
-              cssClasses: c.cssClasses,
-              tagName: t.name,
+              category: c,
+              tag: t,
+              title: `${c.name} » ${t.name}`,
             }))
         )
         .flat();
     },
   },
 });
-
-const tagsWithClasses = computed(() => {});
 </script>
 
 <template>
@@ -37,27 +36,36 @@ const tagsWithClasses = computed(() => {});
         <h4 class="subtitle is-6">
           <a :href="signpost.link">{{ signpost.domain }}</a>
         </h4>
-        <p class="card-text">{{ signpost.desc }}</p>
+        <p class="block card-text" v-for="paragraph in signpost.desc">
+          {{ paragraph }}
+        </p>
       </div>
       <div class="block field is-grouped is-grouped-multiline">
-        <div class="control" v-for="{ cssClasses, tagName } in tagsWithClasses">
+        <div
+          class="control"
+          v-for="{ category, tag, title } in tagsWithClasses"
+        >
           <span class="tags has-addons">
-            <span :class="['tag', cssClasses]">{{ tagName }}</span>
+            <span
+              :class="['tag', ...category.cssClasses, ...tag.cssClasses]"
+              :title="title"
+              >{{ tag.name }}</span
+            >
           </span>
         </div>
-        <div class="control" v-for="(value, key) in signpost.meta">
+        <div class="control" v-if="signpost.complexity !== null">
           <span class="tags has-addons">
-            <span class="tag is-dark">{{ key }}</span>
+            <span class="tag is-dark">Complexity</span>
             <span
               :class="[
                 'tag',
                 {
-                  'is-success': value === 'low',
-                  'is-warning': value === 'medium',
-                  'is-danger': value === 'high',
+                  'is-success': signpost.complexity === 'low',
+                  'is-warning': signpost.complexity === 'medium',
+                  'is-danger': signpost.complexity === 'high',
                 },
               ]"
-              >{{ value }}</span
+              >{{ signpost.complexity }}</span
             >
           </span>
         </div>

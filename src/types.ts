@@ -1,5 +1,13 @@
+type Complexity = "low" | "medium" | "high";
+
 export class Tag {
-  constructor(readonly id: string, readonly name: string) {}
+  constructor(
+    readonly id: string,
+    readonly name: string,
+    readonly cssClasses: string[] = [],
+    readonly display: boolean = true,
+    readonly all: boolean = false
+  ) {}
 }
 
 export class Category {
@@ -17,9 +25,9 @@ export class Signpost {
   constructor(
     readonly name: string,
     readonly link: string,
-    readonly desc: string,
+    readonly desc: string[],
     readonly tags: string[],
-    readonly meta: Record<string, string>
+    readonly complexity: Complexity | null
   ) {
     this.domain = new URL(this.link).hostname;
   }

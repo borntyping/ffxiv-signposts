@@ -31,20 +31,15 @@ export default defineComponent({
       window.sessionStorage.setItem("selectedCategory", value.name);
     },
     selectedTag(value, oldValue) {
-      window.sessionStorage.setItem("selectedTag", value);
+      window.sessionStorage.setItem("selectedTag", value?.name || null);
     },
   },
   components: {
     SignpostCard,
   },
   methods: {
-    selectCategory(category: Category): void {
-      console.debug("Selected category", category);
+    tab(category: Category, tag: Tag) {
       this.selectedCategory = category;
-      this.selectedTag = null;
-    },
-    selectTag(tag: Tag): void {
-      console.debug("Selected tag", tag);
       this.selectedTag = tag;
     },
     selectSignposts(): Signpost[] {
@@ -52,22 +47,14 @@ export default defineComponent({
         return this.signposts;
       }
 
-      console.debug(
-        "Selecting signposts in category",
-        this.selectedCategory!.name
-      );
       let inCategory = this.signposts.filter((s) =>
         s.hasAnyTag(this.selectedCategory!.tags)
       );
 
-      if (this.selectedTag === null) {
+      if (this.selectedTag === null || this.selectedTag.all) {
         return inCategory;
       }
-      console.debug(
-        "Selecting signposts in category and tag",
-        this.selectedCategory!.name,
-        this.selectedTag!.name
-      );
+
       return inCategory.filter((s) => s.hasTag(this.selectedTag!));
     },
   },
@@ -89,7 +76,7 @@ export default defineComponent({
             v-for="category in categories.filter((c) => c.display)"
             :class="{ 'is-active': selectedCategory === category }"
           >
-            <a @click="selectCategory(category)">{{ category.name }}</a>
+            <a @click="tab(category, category.tags[0])">{{ category.name }}</a>
           </li>
         </ul>
       </div>
@@ -101,11 +88,11 @@ export default defineComponent({
         <ul>
           <li
             :key="tag.name"
-            v-for="tag in selectedCategory?.tags"
+            v-for="tag in selectedCategory.tags"
             :class="{ 'is-active': selectedTag === tag }"
             style="margin-top: 0.5em"
           >
-            <a @click="selectTag(tag)">{{ tag.name }}</a>
+            <a @click="tab(selectedCategory, tag)">{{ tag.name }}</a>
           </li>
         </ul>
       </div>
