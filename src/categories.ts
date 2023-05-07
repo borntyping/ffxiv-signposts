@@ -37,7 +37,6 @@ export default [
       new Tag("all", "All", [], true, true),
       new Tag("combat-guides", "Guides"),
       new Tag("hunting", "Hunts"),
-      new Tag("hunting-log", "Hunting Log"),
     ],
     ["is-danger", "is-light"]
   ),
@@ -48,21 +47,27 @@ export default [
       new Tag("crafting", "Crafting"),
       new Tag("gathering", "Gathering"),
       new Tag("fishing", "Fishing"),
-      new Tag("crafting-log", "Crafting Log"),
-      new Tag("fishing-log", "Fishing Log"),
     ],
     ["is-success", "is-light"]
   ),
   new Category("Exploration", [
     new Tag("all", "All", [], true, true),
+    new Tag("maps", "Maps"),
     new Tag("aether-currents", "Aether currents"),
-    new Tag("sightseeing-log", "Sightseeing Log"),
     new Tag("treasure-maps", "Treasure Maps"),
+  ]),
+  new Category("Logs", [
+    new Tag("all", "All", [], true, true),
+    new Tag("crafting-log", "Crafting Log"),
+    new Tag("fishing-log", "Fishing Log"),
+    new Tag("hunting-log", "Hunting Log"),
+    new Tag("sightseeing-log", "Sightseeing Log"),
   ]),
   new Category("Other activities", [
     new Tag("all", "All", [], true, true),
     new Tag("glamour", "Glamour"),
     new Tag("housing", "Housing"),
-    new Tag("mgp", "Golden Saucer"),
+    new Tag("golden-saucer", "Golden Saucer", ["is-light", "is-warning"]),
+    new Tag("chocobo-raising", "Chocobo Raising"),
   ]),
 ];

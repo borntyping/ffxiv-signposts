@@ -11,6 +11,36 @@ export default [
     "medium"
   ),
   new Signpost(
+    "Starter Guide Series",
+    "https://starter-guide.finalfantasyxiv.com/na",
+    ["Short video series teaching you how to play."],
+    ["official", "guides"],
+    "low"
+  ),
+  new Signpost(
+    "Job Guide",
+    "https://eu.finalfantasyxiv.com/jobguide/battle/",
+    ["PvE and PVP actions reference."],
+    ["official", "guides"],
+    "low"
+  ),
+  new Signpost(
+    "Crafting and Gathering Guide",
+    "https://eu.finalfantasyxiv.com/crafting_gathering_guide/",
+    [
+      "Disciples of the Hand and Disciples of the Land actions overview and getting started guide.",
+    ],
+    ["official", "guides"],
+    "low"
+  ),
+  new Signpost(
+    "User interface guide",
+    "https://eu.finalfantasyxiv.com/uiguide/",
+    ["User interface guide and frequently-asked-questions."],
+    ["official", "guides"],
+    "low"
+  ),
+  new Signpost(
     "Xenoveritas' Timers",
     "https://xenoveritas.org/static/ffxiv/timer.html",
     [
@@ -22,7 +52,9 @@ export default [
   new Signpost(
     "Garland Data",
     "https://garlandtools.org/db/",
-    ["Database of every item in the game. Crafting and gathering lists."],
+    [
+      "Database of every item in the game. Crafting and gathering lists. View models of items.",
+    ],
     ["database", "crafting", "gathering", "weather"],
     "high"
   ),
@@ -30,7 +62,7 @@ export default [
     "Garland Bell",
     "https://garlandtools.org/bell/",
     ["Timers for gathering, big fish, GATEs, and hunt targets."],
-    ["crafting", "gathering", "fishing", "hunting", "mgp"],
+    ["crafting", "gathering", "fishing", "hunting", "golden-saucer"],
     "medium"
   ),
   new Signpost(
@@ -38,6 +70,13 @@ export default [
     "https://garlandtools.org/ffxivfisher/",
     ["Weather and time windows for all fish."],
     ["fishing", "fishing-log"],
+    "medium"
+  ),
+  new Signpost(
+    "Cat became hungry",
+    "https://en.ff14angler.com/",
+    ["The most detailed fishing information available."],
+    ["fishing", "sightseeing-log", "island-sanctuary"],
     "medium"
   ),
   new Signpost(
@@ -165,6 +204,7 @@ export default [
     "http://heavenswhere.com/",
     ["Maps and map markers for every zone from Heavensward onwards."],
     [
+      "maps",
       "hunts",
       "sightseeing-log",
       "aether-currents",
@@ -179,5 +219,65 @@ export default [
     ["Guides for Savage/Extreme/Unreal/Ultimate content."],
     ["combat-guides"],
     "high"
+  ),
+  new Signpost(
+    "ARR Triple Triad",
+    "https://arrtripletriad.com/",
+    [
+      "Index of all availible Triple Triad cards, with comments and drop rates.",
+    ],
+    ["triple-triad", "golden-saucer"],
+    "medium"
+  ),
+  new Signpost(
+    "Lore of Verminion",
+    "http://ffxiverminion.com/",
+    [],
+    ["golden-saucer"],
+    "unknown"
+  ),
+  new Signpost(
+    "Late to the Party Finder",
+    "https://latetothepartyfinder.com/",
+    ["Blog with guides to playing FFXIV for new and returning players."],
+    ["guides"],
+    null
+  ),
+  new Signpost(
+    "eureka tracker",
+    "https://ffxiv-eureka.com/",
+    [],
+    ["guides", "eureka"],
+    "unknown"
+  ),
+  new Signpost(
+    "XIV Resource Masterlist",
+    "https://xiv.sleepyshiba.com/masterlist/",
+    ["Far more comprehensive than this site."],
+    ["guides", "database"],
+    "medium"
+  ),
+  new Signpost(
+    "FFXIV World Map",
+    "https://xiv.sleepyshiba.com/world/",
+    ["An extremely high quality, high resolution, and translated world map."],
+    ["guides", "maps"],
+    "low"
+  ),
+  new Signpost(
+    "FFXIV Chocobo Colour Calculator",
+    "https://ffxivchocobo.com/",
+    ["Calculate what chocobo feed you will need to get to a desired colour."],
+    ["chocobo-raising"],
+    "low"
+  ),
+  new Signpost("FFXIV Relic Tracker", "https://ffxivrelictracker.com/"),
+  new Signpost("FFXIVHunt", "https://ffxivhunt.com/index.php"),
+  new Signpost("Sightseeing Log Helper", "https://tylian.net/sslog/"),
+  new Signpost("Housing Snap", "https://housingsnap.com/"),
+  new Signpost("Universalis", "https://universalis.app/"),
+  new Signpost(
+    "FFXIV Hunts Path Finder",
+    "https://www.xivdaily.com/en/hunts/shb"
   ),
 ];

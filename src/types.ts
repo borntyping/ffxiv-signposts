@@ -1,4 +1,4 @@
-type Complexity = "low" | "medium" | "high";
+type Complexity = null | "unknown" | "low" | "medium" | "high";
 
 export class Tag {
   constructor(
@@ -25,9 +25,9 @@ export class Signpost {
   constructor(
     readonly name: string,
     readonly link: string,
-    readonly desc: string[],
-    readonly tags: string[],
-    readonly complexity: Complexity | null
+    readonly desc: string[] = [],
+    readonly tags: string[] = [],
+    readonly complexity: Complexity = "unknown"
   ) {
     this.domain = new URL(this.link).hostname;
   }
