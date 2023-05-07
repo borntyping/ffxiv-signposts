@@ -1,8 +1,5 @@
 export class Tag {
-  constructor(
-    readonly id: string,
-    readonly name: string,
-  ) {}
+  constructor(readonly id: string, readonly name: string) {}
 }
 
 export class Category {
@@ -11,7 +8,7 @@ export class Category {
     readonly tags: Tag[],
     readonly cssClasses: string[] = [],
     readonly display: boolean = true,
-    readonly all: boolean = false,
+    readonly all: boolean = false
   ) {}
 }
 
@@ -24,6 +21,10 @@ export class Signpost {
     readonly tags: string[]
   ) {
     this.domain = new URL(this.link).hostname;
+  }
+
+  toString(): string {
+    return this.name;
   }
 
   hasAnyTag(tags: Tag[]): boolean {
