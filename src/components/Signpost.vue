@@ -17,7 +17,7 @@ export default defineComponent({
       <div>
         <span
           v-for="tag in signpost.tags"
-          class="badge rounded-pill text-bg-light"
+          class="badge rounded-pill text-bg-light me-2"
           >{{ tag }}</span
         >
       </div>

@@ -8,7 +8,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <span class="badge rounded-pill text-bg-light">{{ value }}</span>
+  <span class="badge rounded-pill text-bg-light m-5">{{ value }}</span>
 </template>
 
 <style scoped></style>
