@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Xenoveritas' FFXIV Timers",
+    "link": "https://www.xenoveritas.org/static/ffxiv/timer.html",
+    "tags": ["events", "reset", "housing"]
+  },
+  {
+    "name": "Garland Tools",
+    "link": "https://www.garlandtools.org/",
+    "tags": ["crafting", "gathering", "fishing", "hunting"]
+  },
+  {
+    "name": "FFXIV Squadron",
+    "link": "https://ffxivsquadron.com/",
+    "desc": "Track squadron XP and calculate which recruits can successfully complete a mission.",
+    "tags": ["squadrons"]
+  }
+]
