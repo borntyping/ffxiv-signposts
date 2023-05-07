@@ -1,5 +1,11 @@
 [
   {
+    "name": "Lodestone",
+    "link": "https://eu.finalfantasyxiv.com/lodestone/",
+    "desc": "Official notices and news, play guide, character profile.",
+    "tags": ["official", "guides"]
+  },
+  {
     "name": "Xenoveritas' Timers",
     "link": "https://xenoveritas.org/static/ffxiv/timer.html",
     "desc": "Countdown timers for weekly reset, daily reset, patches/maintenance and housing lotteries.",
@@ -30,7 +36,7 @@
     "tags": ["squadrons"]
   },
   {
-    "name": "FFX|V Fish Tracker App",
+    "name": "FFXIV Fish Tracker",
     "link": "https://ff14fish.carbuncleplushy.com/",
     "desc": "See when hard-to-catch big fish are available.",
     "tags": ["fishing"]

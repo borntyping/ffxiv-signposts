@@ -1,62 +1,47 @@
 <script lang="ts">
-import { defineComponent } from "vue";
-import data from "@/assets/signposts.json";
-import { Signpost, Tag } from "@/types";
+import {defineComponent} from "vue";
+import {Category, Signpost, Tag} from "@/types";
 import SignpostCard from "@/components/SignpostCard.vue";
-
-const cssClassesEvents = ['is-info', 'is-light']
-const cssClassesCombat = ['is-danger', 'is-light']
-const cssClassesCrafting = ['is-success', 'is-light']
-
-const tags = [
-  // Meta
-  new Tag('all', "All"),
-  new Tag('guides', 'Guides', ['is-link', 'is-light']),
-  // Events
-  new Tag('events', "Events", cssClassesEvents),
-  new Tag('daily', "Daily quests", cssClassesEvents),
-  new Tag('weekly', "Weekly quests", cssClassesEvents),
-  new Tag('squadrons', "Squadrons", cssClassesEvents),
-  // DoW/DoM
-  new Tag('hunting', "Hunts", cssClassesCombat),
-  // DoH/DoL
-  new Tag('crafting', "Crafting", cssClassesCrafting),
-  new Tag('gathering', "Gathering", cssClassesCrafting),
-  new Tag('fishing', "Fishing", cssClassesCrafting),
-  // Other activities
-  new Tag('housing', "Housing"),
-  new Tag('mgp', 'Golden Saucer'),
-];
-
-const tagMap = new Map(tags.map(t => [t.id, t]));
-
-const signposts = data.map((obj) => {
-  return new Signpost({
-    ...obj,
-    tags: tags.filter(t => obj.tags.includes(t.id)),
-  });
-});
+import CATEGORIES from "@/categories";
+import SIGNPOSTS from "@/signposts"
 
 export default defineComponent({
   data() {
     return {
-      tags: tags,
-      selectedTag: 'all',
-      signposts: signposts,
+      signposts: SIGNPOSTS,
+      categories: CATEGORIES,
+      tags: CATEGORIES.map((c) => c.tags).flat(),
+      selectedCategory: CATEGORIES[0],
+      selectedTag: null as Tag | null,
     };
   },
   components: {
     SignpostCard,
   },
   methods: {
-    selectTag(id) {
-      this.selectedTag = id;
-      if (id === "all") {
-        this.signposts = signposts;
-      } else {
-        this.signposts = signposts.filter((s) => s.tags.map(t => t.id).includes(id));
-      }
+    selectCategory(category: Category): void {
+      console.debug("Selected category", category)
+      this.selectedCategory = category;
+      this.selectedTag = null;
     },
+    selectTag(tag: Tag): void {
+      console.debug("Selected tag", tag)
+      this.selectedTag = tag;
+    },
+    selectSignposts(): Signpost[] {
+      if (this.selectedCategory.all) {
+        return this.signposts;
+      }
+
+      console.debug("Selecting signposts in category", this.selectedCategory!.name)
+      let inCategory = this.signposts.filter((s) => s.hasAnyTag(this.selectedCategory!.tags));
+
+      if (this.selectedTag === null) {
+        return inCategory;
+      }
+      console.debug("Selecting signposts in category and tag", this.selectedCategory!.name, this.selectedTag!.name)
+      return inCategory.filter((s) => s.hasTag(this.selectedTag!));
+    }
   },
 });
 </script>
@@ -66,18 +51,24 @@ export default defineComponent({
     <div class="hero-body">
       <h1 class="title is-1">FFXIV Signposts</h1>
       <p class="subtitle is-5">
-        A list of helpful Final Fantasy 14 sites organised by activity.
-      </p>
-      <p>Selected tag: <code>{{ JSON.stringify({selectedTag: selectedTag}) }}</code></p>
+        A list of helpful Final Fantasy 14 sites organised by activity. </p>
     </div>
     <div class="hero-foot">
       <div class="tabs is-boxed is-centered">
         <ul>
-          <li
-            v-for="tag in tags"
-            :class="{ 'is-active': selectedTag === tag.id }"
-          >
-            <a @click="selectTag(tag.id)">{{ tag.name }}</a>
+          <li v-for="category in categories.filter((c) => c.display)" :class="{ 'is-active': selectedCategory === category }">
+            <a @click="selectCategory(category)">{{ category.name }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+  <header class="hero is-info">
+    <div class="hero-foot">
+      <div class="tabs is-boxed is-centered">
+        <ul>
+          <li :key="tag.name" v-for="tag in selectedCategory?.tags" :class="{ 'is-active': selectedTag === tag }" style="margin-top: 0.5em;">
+            <a @click="selectTag(tag)">{{ tag.name }}</a>
           </li>
         </ul>
       </div>
@@ -85,8 +76,8 @@ export default defineComponent({
   </header>
   <main class="section">
     <div class="columns is-multiline is-centered">
-      <div class="column is-one-quarter" v-for="signpost in signposts">
-        <SignpostCard :signpost="signpost" />
+      <div class="column is-6-desktop is-4-widescreen is-2-fullhd" v-for="signpost in selectSignposts()">
+        <SignpostCard :signpost="signpost" :categories="categories"/>
       </div>
     </div>
   </main>

@@ -12,7 +12,7 @@
       url("https://img.finalfantasyxiv.com/lds/promo/pc/global/images/world/what/crystal_03.png"),
     #000000;
 
-  animation: background 240s linear infinite;
+  animation: background 45s linear infinite;
 }
 
 @keyframes background {
@@ -20,6 +20,6 @@
     background-position: 50% 0, 50% 0, 50% 0;
   }
   100% {
-    background-position: 50% 900%, 50% 900%, 50% 900%;
+    background-position: 50% -900%, 50% -900%, 50% -2400%;
   }
 }

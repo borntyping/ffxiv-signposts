@@ -1,35 +1,36 @@
 export class Tag {
-  readonly id: string;
-  readonly name: string;
-  readonly cssClasses: string[];
+  constructor(
+    readonly id: string,
+    readonly name: string,
+  ) {}
+}
 
-  constructor(id: string, name: string, cssClasses: string[] = ["is-light"]) {
-    this.id = id,
-    this.name = name;
-    this.cssClasses = cssClasses;
-  }
+export class Category {
+  constructor(
+    readonly name: string,
+    readonly tags: Tag[],
+    readonly cssClasses: string[] = [],
+    readonly display: boolean = true,
+    readonly all: boolean = false,
+  ) {}
 }
 
 export class Signpost {
-  readonly name: string;
-  readonly link: string;
-
   readonly domain: string;
-  readonly desc: string;
-  readonly tags: Tag[];
-
-
-  constructor(obj: {
-    name: string;
-    desc: string;
-    link: string;
-    tags: Tag[];
-  }) {
-    this.name = obj.name;
-    this.desc = obj.desc;
-    this.link = obj.link;
-    this.tags = obj.tags;
-
+  constructor(
+    readonly name: string,
+    readonly link: string,
+    readonly desc: string,
+    readonly tags: string[]
+  ) {
     this.domain = new URL(this.link).hostname;
+  }
+
+  hasAnyTag(tags: Tag[]): boolean {
+    return tags.filter((tag) => this.tags.includes(tag.id)).length > 0;
+  }
+
+  hasTag(tag: Tag): boolean {
+    return this.tags.includes(tag.id);
   }
 }
