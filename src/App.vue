@@ -1,41 +1,39 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import { Category, Signpost, Tag } from "@/types";
+import { Category, Tag, Signpost } from "@/types";
 import SignpostCard from "@/components/SignpostCard.vue";
-import CATEGORIES from "@/categories";
-import SIGNPOSTS from "@/signposts";
+import categories from "@/definitions";
+import signposts from "@/signposts";
 
-// TODO: precalculate categories.signposts and tags.signposts so we can put counts in tabs - it would also make select() far simpler
 // TODO: Make tags clickable by passing tag() to SignPostCard.
 // TODO: More ideas: per tag comment explaining what the site can do for that tag, more info drop-down on long text
 
+const CATEGORY = "category";
+const TAG = "tag";
+
 export default defineComponent({
   data() {
-    const selectedCategoryName =
-      window.sessionStorage.getItem("selectedCategory");
-    const selectedCategory =
-      CATEGORIES.filter((c) => c.name === selectedCategoryName)[0] ||
-      CATEGORIES[0];
+    const categoryName = window.sessionStorage.getItem(CATEGORY);
+    const tagName = window.sessionStorage.getItem(TAG);
 
-    const tags = CATEGORIES.map((c) => c.tags).flat();
-    const selectedTagName = window.sessionStorage.getItem("selectedTag");
-    const selectedTag =
-      tags.filter((t) => t.name === selectedTagName)[0] || null;
+    const category: Category =
+      categories.filter((c) => c.name === categoryName)[0] ?? categories[0];
+    const tag: Tag =
+      category.tags.filter((t) => t.name === tagName)[0] ?? category.tags[0];
 
     return {
-      signposts: SIGNPOSTS.sort(),
-      categories: CATEGORIES,
-      tags: tags,
-      selectedCategory: selectedCategory,
-      selectedTag: selectedTag,
+      signposts: signposts.sort(),
+      categories: categories,
+      selectedCategory: category,
+      selectedTag: tag,
     };
   },
   watch: {
     selectedCategory(value: Category, oldValue) {
-      window.sessionStorage.setItem("selectedCategory", value.name);
+      window.sessionStorage.setItem(CATEGORY, value.name);
     },
-    selectedTag(value, oldValue) {
-      window.sessionStorage.setItem("selectedTag", value?.name || null);
+    selectedTag(value: Tag, oldValue) {
+      window.sessionStorage.setItem(TAG, value.name);
     },
   },
   components: {
@@ -45,21 +43,6 @@ export default defineComponent({
     tab(category: Category, tag: Tag) {
       this.selectedCategory = category;
       this.selectedTag = tag;
-    },
-    selectSignposts(): Signpost[] {
-      if (this.selectedCategory.all) {
-        return this.signposts;
-      }
-
-      let inCategory = this.signposts.filter((s) =>
-        s.hasAnyTag(this.selectedCategory!.tags)
-      );
-
-      if (this.selectedTag === null || this.selectedTag.all) {
-        return inCategory;
-      }
-
-      return inCategory.filter((s) => s.hasTag(this.selectedTag!));
     },
   },
 });
@@ -77,26 +60,30 @@ export default defineComponent({
       <div class="tabs is-boxed is-centered">
         <ul>
           <li
-            v-for="category in categories.filter((c) => c.display)"
+            v-for="category in categories.filter((c) => !c.hide)"
             :class="{ 'is-active': selectedCategory === category }"
           >
-            <a @click="tab(category, category.tags[0])">{{ category.name }}</a>
+            <a @click="tab(category, category.tags[0])"
+              >{{ category.name }} ({{ category.signposts.length }})</a
+            >
           </li>
         </ul>
       </div>
     </div>
   </header>
-  <header class="hero is-info">
+  <header class="hero is-info" v-if="!selectedCategory.all">
     <div class="hero-foot">
       <div class="tabs is-boxed is-centered">
         <ul>
           <li
             :key="tag.name"
-            v-for="tag in selectedCategory.tags"
+            v-for="tag in selectedCategory.tags.filter((c) => !c.hide)"
             :class="{ 'is-active': selectedTag === tag }"
             style="margin-top: 0.5em"
           >
-            <a @click="tab(selectedCategory, tag)">{{ tag.name }}</a>
+            <a @click="tab(selectedCategory, tag)"
+              >{{ tag.name }} ({{ tag.signposts.length }})</a
+            >
           </li>
         </ul>
       </div>
@@ -108,7 +95,7 @@ export default defineComponent({
         <div
           :key="signpost.name"
           class="column is-6-desktop is-4-widescreen is-2-fullhd"
-          v-for="signpost in selectSignposts()"
+          v-for="signpost in selectedTag.signposts"
         >
           <SignpostCard :signpost="signpost" :categories="categories" />
         </div>

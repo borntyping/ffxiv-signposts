@@ -1,23 +1,28 @@
 type Complexity = null | "unknown" | "low" | "medium" | "high";
 
-export class Tag {
-  constructor(
-    readonly id: string,
-    readonly name: string,
-    readonly cssClasses: string[] = [],
-    readonly display: boolean = true,
-    readonly all: boolean = false
-  ) {}
+export interface PartialTab {
+  readonly name: string;
+  readonly cssClasses?: string[];
+  readonly all?: boolean;
+  readonly hide?: boolean;
 }
 
-export class Category {
-  constructor(
-    readonly name: string,
-    readonly tags: Tag[],
-    readonly cssClasses: string[] = [],
-    readonly display: boolean = true,
-    readonly all: boolean = false
-  ) {}
+export interface PartialTag extends PartialTab {
+  readonly id: string;
+}
+
+export interface PartialCategory extends PartialTab {
+  readonly tags?: PartialTag[];
+}
+
+export interface Signposts {
+  readonly signposts: Signpost[];
+}
+
+export interface Tag extends Required<PartialTag>, Signposts {}
+
+export interface Category extends Required<PartialCategory>, Signposts {
+  readonly tags: Tag[];
 }
 
 export class Signpost {
@@ -36,11 +41,11 @@ export class Signpost {
     return this.name;
   }
 
-  hasAnyTag(tags: Tag[]): boolean {
+  hasAnyTag(tags: Pick<PartialTag, "id">[]): boolean {
     return tags.filter((tag) => this.tags.includes(tag.id)).length > 0;
   }
 
-  hasTag(tag: Tag): boolean {
+  hasTag(tag: Pick<PartialTag, "id">): boolean {
     return this.tags.includes(tag.id);
   }
 }
