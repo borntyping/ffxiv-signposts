@@ -1,6 +1,6 @@
 {
-  "name": "ffxiv-signpost",
-  "version": "0.0.0",
+  "name": "@borntyping/ffxiv-signposts",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "vite",
@@ -8,7 +8,8 @@
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit",
-    "style": "prettier --write --cache ."
+    "style": "prettier --write --cache .",
+    "style-check": "prettier --check ."
   },
   "dependencies": {
     "bulma": "^0.9.4",
