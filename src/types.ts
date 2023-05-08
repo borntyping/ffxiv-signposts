@@ -30,11 +30,31 @@ export class Signpost {
   constructor(
     readonly name: string,
     readonly link: string,
-    readonly desc: string[] = [],
-    readonly tags: string[] = [],
-    readonly complexity: Complexity = "unknown"
+    readonly tags: Array<[string[], string]> = [],
+    readonly complexity: Complexity = "unknown",
+    readonly official: boolean = false
   ) {
     this.domain = new URL(this.link).hostname;
+  }
+
+  static create(object: {
+    name: string;
+    link: string;
+    tags?: Array<[string[], string]>;
+    complexity?: Complexity;
+    official?: boolean;
+  }): Signpost {
+    return new Signpost(
+      object.name,
+      object.link,
+      object.tags ?? [],
+      object.complexity ?? null,
+      object.official ?? false
+    );
+  }
+
+  get allTags(): string[] {
+    return [...this.tags, ...this.tags.map(([tags, _]) => tags).flat()];
   }
 
   toString(): string {
@@ -42,10 +62,10 @@ export class Signpost {
   }
 
   hasAnyTag(tags: Pick<PartialTag, "id">[]): boolean {
-    return tags.filter((tag) => this.tags.includes(tag.id)).length > 0;
+    return tags.filter((tag) => this.hasTag(tag)).length > 0;
   }
 
   hasTag(tag: Pick<PartialTag, "id">): boolean {
-    return this.tags.includes(tag.id);
+    return this.allTags.includes(tag.id);
   }
 }

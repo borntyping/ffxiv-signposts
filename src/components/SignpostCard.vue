@@ -1,20 +1,38 @@
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
 import { Category, Signpost } from "@/types";
+import { defineComponent, PropType } from "vue";
 
 export default defineComponent({
   name: "SignpostCard",
   props: {
     signpost: {
       type: Object as PropType<Signpost>,
-      required: true
+      required: true,
     },
     categories: {
       type: Array as PropType<Category[]>,
-      required: true
+      required: true,
     },
   },
   computed: {
+    tags: function () {
+      return this.signpost.tags.map(([tags, description]) => {
+        return {
+          description: description,
+          tags: this.categories
+            .map((category) =>
+              category.tags
+                .filter((tag) => tags.includes(tag.id))
+                .map((tag) => ({
+                  category: category,
+                  tag: tag,
+                  title: `${category.name} » ${tag.name}`,
+                }))
+            )
+            .flat(),
+        };
+      });
+    },
     tagsWithClasses() {
       return this.categories
         .map((c) =>
@@ -42,24 +60,25 @@ export default defineComponent({
         <h4 class="subtitle is-6">
           <a :href="signpost.link">{{ signpost.domain }}</a>
         </h4>
-        <p class="block card-text" v-for="paragraph in signpost.desc">
-          {{ paragraph }}
-        </p>
+        <div class="block card-text">
+          <p
+            class="app-description"
+            v-for="{ description, tags } in tags"
+          >
+            <span class="tags" style="display: inline !important"
+              ><span
+                v-for="{ category, tag, title } in tags"
+                :class="['tag', ...category.cssClasses, ...tag.cssClasses]"
+                :title="title"
+                >{{ tag.name }}</span
+              ></span
+            >
+            {{ description }}
+          </p>
+        </div>
       </div>
       <div class="block field is-grouped is-grouped-multiline">
-        <div
-          class="control"
-          v-for="{ category, tag, title } in tagsWithClasses"
-        >
-          <span class="tags has-addons">
-            <span
-              :class="['tag', ...category.cssClasses, ...tag.cssClasses]"
-              :title="title"
-              >{{ tag.name }}</span
-            >
-          </span>
-        </div>
-        <div class="control" v-if="signpost.complexity !== null">
+        <div class="control" v-if="signpost.complexity">
           <span class="tags has-addons">
             <span class="tag is-dark">Complexity</span>
             <span
@@ -73,6 +92,11 @@ export default defineComponent({
               ]"
               >{{ signpost.complexity }}</span
             >
+          </span>
+        </div>
+        <div class="control" v-if="signpost.official">
+          <span class="tags has-addons">
+            <span class="tag is-link">Official</span>
           </span>
         </div>
       </div>
@@ -90,5 +114,13 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.app-description:not(:last-child) {
+  margin-bottom: 1.5rem;
+}
+
+p .tags .tag {
+  margin-bottom: unset;
 }
 </style>

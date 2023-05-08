@@ -4,7 +4,6 @@ import { defineComponent } from "vue";
 import { Category, Tag, Signpost } from "@/types";
 import SignpostCard from "@/components/SignpostCard.vue";
 import categories from "@/definitions";
-import signposts from "@/signposts";
 
 // TODO: Make tags clickable by passing tag() to SignPostCard.
 // TODO: More ideas: per tag comment explaining what the site can do for that tag, more info drop-down on long text
@@ -23,7 +22,6 @@ export default defineComponent({
       category.tags.filter((t) => t.name === tagName)[0] ?? category.tags[0];
 
     return {
-      signposts: signposts.sort(),
       categories: categories,
       selectedCategory: category,
       selectedTag: tag,

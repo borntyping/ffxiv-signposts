@@ -10,7 +10,7 @@ class Factory {
     let signposts = this.signposts.filter(
       (s) => category.all || s.hasAnyTag(category.tags ?? [])
     );
-    let tags: Required<PartialTag>[] = (category.tags ?? []).map((tag) => {
+    let tags: Tag[] = (category.tags ?? []).map((tag) => {
       return this.tag(tag, signposts);
     });
 
@@ -20,7 +20,7 @@ class Factory {
       all: category.all ?? false,
       hide: category.hide ?? false,
       tags: [this.all(signposts), ...tags],
-      signposts: signposts,
+      signposts: signposts.sort(),
     };
   }
 
@@ -31,7 +31,7 @@ class Factory {
       cssClasses: tag.cssClasses ?? [],
       all: tag.all ?? false,
       hide: tag.hide ?? false,
-      signposts: signposts.filter((s) => s.hasTag(tag)),
+      signposts: signposts.filter((s) => s.hasTag(tag)).sort(),
     };
   }
 
@@ -59,10 +59,9 @@ export default [
   factory.category({
     name: "Reference",
     tags: [
-      { id: "guides", name: "Guides" },
-      { id: "database", name: "Databases" },
-      { id: "wiki", name: "Wikis" },
-      { id: "completion", name: "Completion" },
+      { id: "guide", name: "Guides" },
+      { id: "database", name: "Database" },
+      { id: "wiki", name: "Wiki" },
       { id: "weather", name: "Weather" },
     ],
     cssClasses: ["is-link", "is-light"],
@@ -73,6 +72,7 @@ export default [
       { id: "events", name: "Special Events" },
       { id: "daily", name: "Daily quests" },
       { id: "weekly", name: "Weekly quests" },
+      { id: "levequests", name: "Levequests" },
       { id: "squadrons", name: "Squadrons" },
     ],
     cssClasses: ["is-info", "is-light"],
@@ -82,6 +82,8 @@ export default [
     tags: [
       { id: "combat-guides", name: "Guides" },
       { id: "hunting", name: "Hunts" },
+      { id: "hunting-log", name: "Hunting Log" },
+      { id: "fates", name: "FATEs" },
     ],
     cssClasses: ["is-danger", "is-light"],
   }),
@@ -91,6 +93,8 @@ export default [
       { id: "crafting", name: "Crafting" },
       { id: "gathering", name: "Gathering" },
       { id: "fishing", name: "Fishing" },
+      { id: "crafting-log", name: "Crafting Log" },
+      { id: "fishing-log", name: "Fishing Log" },
     ],
     cssClasses: ["is-success", "is-light"],
   }),
@@ -100,28 +104,26 @@ export default [
       { id: "maps", name: "Maps" },
       { id: "aether-currents", name: "Aether currents" },
       { id: "treasure-maps", name: "Treasure Maps" },
+      { id: "sightseeing-log", name: "Sightseeing Log" },
     ],
   }),
   factory.category({
-    name: "Logs",
+    name: "Golden Saucer",
     tags: [
-      { id: "crafting-log", name: "Crafting Log" },
-      { id: "fishing-log", name: "Fishing Log" },
-      { id: "hunting-log", name: "Hunting Log" },
-      { id: "sightseeing-log", name: "Sightseeing Log" },
+      { id: "fashion-report", name: "Fashion Report" },
+      { id: "triple-triad", name: "Triple Triad" },
+      { id: "chocobo-racing", name: "Chocobo Racing" },
+      { id: "lord-of-verminion", name: "Lord of Verminion" },
     ],
+    cssClasses: ["is-light", "is-warning"],
   }),
   factory.category({
     name: "Other activities",
     tags: [
       { id: "glamour", name: "Glamour" },
       { id: "housing", name: "Housing" },
-      {
-        id: "golden-saucer",
-        name: "Golden Saucer",
-        cssClasses: ["is-light", "is-warning"],
-      },
       { id: "chocobo-raising", name: "Chocobo Raising" },
+      { id: "island-sanctuary", name: "Island Sanctuary" },
     ],
   }),
 ];
