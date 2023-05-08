@@ -5,6 +5,10 @@ import SignpostCard from "@/components/SignpostCard.vue";
 import CATEGORIES from "@/categories";
 import SIGNPOSTS from "@/signposts";
 
+// TODO: precalculate categories.signposts and tags.signposts so we can put counts in tabs - it would also make select() far simpler
+// TODO: Make tags clickable by passing tag() to SignPostCard.
+// TODO: More ideas: per tag comment explaining what the site can do for that tag, more info drop-down on long text
+
 export default defineComponent({
   data() {
     const selectedCategoryName =
