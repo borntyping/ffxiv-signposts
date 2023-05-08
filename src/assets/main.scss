@@ -3,7 +3,17 @@
 
 // Images from https://na.finalfantasyxiv.com/a_realm_reborn/world
 // CSS based on https://codepen.io/hteumeuleu/pen/Dqpgey and https://codepen.io/Reignson/pen/ALeMzN.
-:root {
+#background {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -999;
+  //mix-blend-mode: screen;
+
   background: border-box center repeat-y
       url("https://img.finalfantasyxiv.com/lds/promo/pc/global/images/world/what/crystal_01.png"),
     border-box center repeat-y
@@ -11,15 +21,16 @@
     border-box center repeat-y
       url("https://img.finalfantasyxiv.com/lds/promo/pc/global/images/world/what/crystal_03.png"),
     #000000;
+  background-position-x: 50%;
 
-  animation: background 45s linear infinite;
+  animation: crystals 45s linear infinite;
 }
 
-@keyframes background {
+@keyframes crystals {
   0% {
-    background-position: 50% 0, 50% 0, 50% 0;
+    background-position-y: 0;
   }
   100% {
-    background-position: 50% -900%, 50% -900%, 50% -2400%;
+    background-position-y: -900%, -900%, -2400%;
   }
 }
