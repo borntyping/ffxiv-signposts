@@ -80,7 +80,7 @@ export default [
         text: "Timers for gathering nodes.",
       },
       { tags: ["fishing", "fishing-log"], text: "Timers for big fish." },
-      { tags: ["hunts"], text: "Timers for hunt targets." },
+      { tags: ["the-hunt"], text: "Timers for hunt targets." },
       { tags: ["gates"], text: "Timers for upcoming GATEs." },
     ],
     complexity: "medium",
@@ -179,7 +179,7 @@ export default [
     name: "Faloop!",
     link: "https://faloop.app/",
     desc: [
-      { tags: ["hunts"], text: "Availability windows for hunting targets." },
+      { tags: ["the-hunt"], text: "Availability windows for hunting targets." },
       { tags: ["fates"], text: "Availability windows for FATES." },
     ],
     complexity: "high",
@@ -281,7 +281,7 @@ export default [
     link: "http://heavenswhere.com/",
     desc: [
       { tags: ["maps"], text: "Maps for every zone from Heavensward onwards." },
-      { tags: ["hunts"], text: "Hunt target map markers." },
+      { tags: ["the-hunt"], text: "Hunt target map markers." },
       { tags: ["sightseeing-log"], text: "Sightseeing log map markers." },
       { tags: ["aether-currents"], text: "Aether currents map markers." },
       { tags: ["treasure-maps"], text: "Treasure map markers." },
@@ -373,29 +373,29 @@ export default [
     desc: [
       {
         tags: ["relics"],
-        text: "Track progress towards collecting relics."
+        text: "Track progress towards collecting relics.",
       },
       {
         tags: ["crafting"],
-        text: "Links to Teamcraft lists for all crafted relics."
-      }
+        text: "Links to Teamcraft lists for all crafted relics.",
+      },
     ],
-    complexity: "medium"
+    complexity: "medium",
   }),
   Signpost.create({
     name: "FFXIVHunt",
     link: "https://ffxivhunt.com/index.php",
     desc: [
       {
-        tags: ["hunts"],
+        tags: ["the-hunt"],
         text: "Detailed information about all hunt marks.",
       },
       {
-        tags: ["hunts"],
+        tags: ["the-hunt"],
         text: "Find the quickest path between daily hunt marks.",
       },
     ],
-    complexity: "medium"
+    complexity: "medium",
   }),
   Signpost.create({
     name: "Sightseeing Log Helper",
@@ -406,7 +406,7 @@ export default [
         text: "Displays when sightseeing locations will be active.",
       },
     ],
-    complexity: "low"
+    complexity: "low",
   }),
   Signpost.create({
     name: "Universalis",
@@ -417,17 +417,114 @@ export default [
         text: "Crowdsourced marketboard prices.",
       },
     ],
-    complexity: "high"
+    complexity: "high",
   }),
   Signpost.create({
     name: "FFXIV Hunts Path Finder",
     link: "https://www.xivdaily.com/en/hunts/shb",
     desc: [
       {
-        tags: ["hunts"],
+        tags: ["the-hunt"],
         text: "Find the quickest path between daily hunt marks.",
       },
     ],
-    complexity: "low"
+    complexity: "low",
+  }),
+  Signpost.create({
+    name: "u/kaiyoko",
+    link: "https://www.reddit.com/user/kaiyoko/",
+    desc: [
+      {
+        tags: ["fashion-report"],
+        text: "Weekly guides on getting 100pts or 80pts in Fashion Report.",
+      },
+    ],
+    complexity: "low",
+  }),
+  Signpost.create({
+    name: "FFXIV Cactpot Solver",
+    link: "https://super-aardvark.github.io/yuryu/",
+    desc: [
+      {
+        tags: ["mini-cactpot"],
+        text: "Solver for Mini Cactpot.",
+      },
+    ],
+    complexity: "low",
+  }),
+  Signpost.create({
+    name: "Cactpot Solver",
+    link: "https://www.thewordfinder.com/cactpot-solver/",
+    desc: [
+      {
+        tags: ["mini-cactpot"],
+        text: "Solver for Mini Cactpot.",
+      },
+    ],
+    complexity: "low",
+  }),
+
+  Signpost.create({
+    name: "FFXIV Clock",
+    link: "https://www.ffxivclock.com/",
+    desc: [
+      {
+        tags: ["gathering"],
+        text: "Timers for gathering nodes.",
+      },
+    ],
+    complexity: "medium",
+  }),
+  Signpost.create({
+    name: "FFXIV Gardening",
+    link: "https://ffxivgardening.com/",
+    desc: [
+      {
+        tags: ["guide", "housing", "gardening"],
+        text: "Gardening theory-crafting and guides including crossbreeding diagrams.",
+      },
+      {
+        tags: ["database", "housing", "gardening"],
+        text: "Database of seeds.",
+      },
+    ],
+    complexity: "high",
+  }),
+  Signpost.create({
+    name: "XIV Status",
+    link: "https://xivstatus.com/",
+    desc: [
+      {
+        tags: ["events"],
+        text: "Third-party server status page.",
+      },
+    ],
+  }),
+  Signpost.create({
+    name: "Lulu's Tools",
+    link: "https://ffxiv.pf-n.co",
+    desc: [
+      {
+        tags: ["chocobo-raising"],
+        text: "Calculator for Chocobo colours.",
+      },
+      {
+        tags: ["mini-cactpot"],
+        text: "Solver for Mini Cactpot.",
+      },
+      {
+        tags: ["ocean-fishing"],
+        text: "Schedule for upcoming ocean fishing voyages.",
+      },
+      {
+        tags: ["weather"],
+        text: "Schedule and predictions for weather in Eorzea.",
+      },
+      {
+        tags: ["wondrous-tails"],
+        text: "Calculator for Wondrous Tails.",
+      },
+    ],
+    complexity: "low",
   }),
 ];

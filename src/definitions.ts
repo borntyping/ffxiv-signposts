@@ -67,7 +67,7 @@ export default [
     cssClasses: ["is-link", "is-light"],
   }),
   factory.category({
-    name: "Dailies and Weeklies",
+    name: "Repeatable Quests",
     tags: [
       { id: "events", name: "Special Events" },
       { id: "daily", name: "Daily quests" },
@@ -80,9 +80,10 @@ export default [
   factory.category({
     name: "Disciples of War and Magic",
     tags: [
-      { id: "hunts", name: "Hunts" },
+      { id: "the-hunt", name: "The Hunt" },
       { id: "hunting-log", name: "Hunting Log" },
       { id: "fates", name: "FATEs" },
+      { id: "wondrous-tails", name: "Wondrous Tails" },
       { id: "pve-guide", name: "PvE Guides" },
       { id: "pvp-guide", name: "PvP Guides" },
     ],
@@ -96,6 +97,7 @@ export default [
       { id: "fishing", name: "Fishing" },
       { id: "crafting-log", name: "Crafting Log" },
       { id: "fishing-log", name: "Fishing Log" },
+      { id: "ocean-fishing", name: "Ocean Fishing" },
     ],
     cssClasses: ["is-success", "is-light"],
   }),
@@ -115,6 +117,7 @@ export default [
       { id: "fashion-report", name: "Fashion Report" },
       { id: "gates", name: "GATEs" },
       { id: "lord-of-verminion", name: "Lord of Verminion" },
+      { id: "mini-cactpot", name: "Mini Cactpot" },
       { id: "triple-triad", name: "Triple Triad" },
     ],
     cssClasses: ["is-light", "is-warning"],
@@ -122,6 +125,7 @@ export default [
   factory.category({
     name: "Other activities",
     tags: [
+      { id: "gardening", name: "Gardening" },
       { id: "glamour", name: "Glamour" },
       { id: "housing", name: "Housing" },
       { id: "chocobo-raising", name: "Chocobo Raising" },
