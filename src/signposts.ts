@@ -80,7 +80,7 @@ export default [
         text: "Timers for gathering nodes.",
       },
       { tags: ["fishing", "fishing-log"], text: "Timers for big fish." },
-      { tags: ["hunting"], text: "Timers for hunt targets." },
+      { tags: ["hunts"], text: "Timers for hunt targets." },
       { tags: ["gates"], text: "Timers for upcoming GATEs." },
     ],
     complexity: "medium",
@@ -179,7 +179,7 @@ export default [
     name: "Faloop!",
     link: "https://faloop.app/",
     desc: [
-      { tags: ["hunting"], text: "Availability windows for hunting targets." },
+      { tags: ["hunts"], text: "Availability windows for hunting targets." },
       { tags: ["fates"], text: "Availability windows for FATES." },
     ],
     complexity: "high",
@@ -281,7 +281,7 @@ export default [
     link: "http://heavenswhere.com/",
     desc: [
       { tags: ["maps"], text: "Maps for every zone from Heavensward onwards." },
-      { tags: ["hunting"], text: "Hunt target map markers." },
+      { tags: ["hunts"], text: "Hunt target map markers." },
       { tags: ["sightseeing-log"], text: "Sightseeing log map markers." },
       { tags: ["aether-currents"], text: "Aether currents map markers." },
       { tags: ["treasure-maps"], text: "Treasure map markers." },
@@ -370,19 +370,64 @@ export default [
   Signpost.create({
     name: "FFXIV Relic Tracker",
     link: "https://ffxivrelictracker.com/",
+    desc: [
+      {
+        tags: ["relics"],
+        text: "Track progress towards collecting relics."
+      },
+      {
+        tags: ["crafting"],
+        text: "Links to Teamcraft lists for all crafted relics."
+      }
+    ],
+    complexity: "medium"
   }),
   Signpost.create({
     name: "FFXIVHunt",
     link: "https://ffxivhunt.com/index.php",
+    desc: [
+      {
+        tags: ["hunts"],
+        text: "Detailed information about all hunt marks.",
+      },
+      {
+        tags: ["hunts"],
+        text: "Find the quickest path between daily hunt marks.",
+      },
+    ],
+    complexity: "medium"
   }),
   Signpost.create({
     name: "Sightseeing Log Helper",
     link: "https://tylian.net/sslog/",
+    desc: [
+      {
+        tags: ["sightseeing-log"],
+        text: "Displays when sightseeing locations will be active.",
+      },
+    ],
+    complexity: "low"
   }),
-  Signpost.create({ name: "Housing Snap", link: "https://housingsnap.com/" }),
-  Signpost.create({ name: "Universalis", link: "https://universalis.app/" }),
+  Signpost.create({
+    name: "Universalis",
+    link: "https://universalis.app/",
+    desc: [
+      {
+        tags: ["marketboard"],
+        text: "Crowdsourced marketboard prices.",
+      },
+    ],
+    complexity: "high"
+  }),
   Signpost.create({
     name: "FFXIV Hunts Path Finder",
     link: "https://www.xivdaily.com/en/hunts/shb",
+    desc: [
+      {
+        tags: ["hunts"],
+        text: "Find the quickest path between daily hunt marks.",
+      },
+    ],
+    complexity: "low"
   }),
 ];

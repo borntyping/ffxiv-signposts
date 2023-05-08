@@ -80,7 +80,7 @@ export default [
   factory.category({
     name: "Disciples of War and Magic",
     tags: [
-      { id: "hunting", name: "Hunts" },
+      { id: "hunts", name: "Hunts" },
       { id: "hunting-log", name: "Hunting Log" },
       { id: "fates", name: "FATEs" },
       { id: "pve-guide", name: "PvE Guides" },
@@ -126,6 +126,8 @@ export default [
       { id: "housing", name: "Housing" },
       { id: "chocobo-raising", name: "Chocobo Raising" },
       { id: "island-sanctuary", name: "Island Sanctuary" },
+      { id: "marketboard", name: "Marketboard" },
+      { id: "relics", name: "Relics" },
     ],
   }),
 ];
