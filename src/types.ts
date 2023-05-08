@@ -25,12 +25,17 @@ export interface Category extends Required<PartialCategory>, Signposts {
   readonly tags: Tag[];
 }
 
+export interface SignpostTags {
+  readonly tags: string[];
+  readonly text: string;
+}
+
 export class Signpost {
   readonly domain: string;
   constructor(
     readonly name: string,
     readonly link: string,
-    readonly tags: Array<[string[], string]> = [],
+    readonly desc: Array<SignpostTags> = [],
     readonly complexity: Complexity = "unknown",
     readonly official: boolean = false
   ) {
@@ -40,21 +45,21 @@ export class Signpost {
   static create(object: {
     name: string;
     link: string;
-    tags?: Array<[string[], string]>;
+    desc?: Array<SignpostTags>;
     complexity?: Complexity;
     official?: boolean;
   }): Signpost {
     return new Signpost(
       object.name,
       object.link,
-      object.tags ?? [],
+      object.desc ?? [],
       object.complexity ?? null,
       object.official ?? false
     );
   }
 
-  get allTags(): string[] {
-    return [...this.tags, ...this.tags.map(([tags, _]) => tags).flat()];
+  get tags(): string[] {
+    return this.desc.map(({ tags }) => tags).flat();
   }
 
   toString(): string {
@@ -66,6 +71,6 @@ export class Signpost {
   }
 
   hasTag(tag: Pick<PartialTag, "id">): boolean {
-    return this.allTags.includes(tag.id);
+    return this.tags.includes(tag.id);
   }
 }

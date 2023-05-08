@@ -1,12 +1,9 @@
 <script lang="ts">
 import Tabs from "@/components/Tabs.vue";
 import { defineComponent } from "vue";
-import { Category, Tag, Signpost } from "@/types";
+import { Category, Tag } from "@/types";
 import SignpostCard from "@/components/SignpostCard.vue";
 import categories from "@/definitions";
-
-// TODO: Make tags clickable by passing tag() to SignPostCard.
-// TODO: More ideas: per tag comment explaining what the site can do for that tag, more info drop-down on long text
 
 const CATEGORY = "category";
 const TAG = "tag";
@@ -81,7 +78,11 @@ export default defineComponent({
           v-for="signpost in selectedTag.signposts"
           class="column is-6-desktop is-4-widescreen is-2-fullhd"
         >
-          <SignpostCard :signpost="signpost" :categories="categories" />
+          <SignpostCard
+            :signpost="signpost"
+            :categories="categories"
+            :switchTab="switchTab"
+          />
         </div>
       </TransitionGroup>
     </div>

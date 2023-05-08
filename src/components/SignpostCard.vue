@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Category, Signpost } from "@/types";
+import { Category, Signpost, Tag } from "@/types";
 import { defineComponent, PropType } from "vue";
 
 export default defineComponent({
@@ -13,12 +13,15 @@ export default defineComponent({
       type: Array as PropType<Category[]>,
       required: true,
     },
+    switchTab: {
+      type: Function as PropType<(category: Category, tag: Tag) => void>,
+      required: true,
+    },
   },
   computed: {
-    tags: function () {
-      return this.signpost.tags.map(([tags, description]) => {
+    signpostTags: function () {
+      return this.signpost.desc.map(({ tags, text }) => {
         return {
-          description: description,
           tags: this.categories
             .map((category) =>
               category.tags
@@ -30,21 +33,9 @@ export default defineComponent({
                 }))
             )
             .flat(),
+          text: text,
         };
       });
-    },
-    tagsWithClasses() {
-      return this.categories
-        .map((c) =>
-          c.tags
-            .filter((t) => this.signpost?.hasTag(t))
-            .map((t) => ({
-              category: c,
-              tag: t,
-              title: `${c.name} » ${t.name}`,
-            }))
-        )
-        .flat();
     },
   },
 });
@@ -61,19 +52,24 @@ export default defineComponent({
           <a :href="signpost.link">{{ signpost.domain }}</a>
         </h4>
         <div class="block card-text">
-          <p
-            class="app-description"
-            v-for="{ description, tags } in tags"
-          >
-            <span class="tags" style="display: inline !important"
-              ><span
-                v-for="{ category, tag, title } in tags"
-                :class="['tag', ...category.cssClasses, ...tag.cssClasses]"
-                :title="title"
-                >{{ tag.name }}</span
-              ></span
+          <p class="app-description" v-for="{ tags, text } in signpostTags">
+            <span
+              class="tags"
+              style="display: inline !important; margin-right: 0.5rem"
             >
-            {{ description }}
+              <a
+                v-for="{ category, tag, title } in tags"
+                :class="[
+                  'tag',
+                  ...(category.cssClasses ?? []),
+                  ...tag.cssClasses,
+                ]"
+                :title="title"
+                @click="switchTab(category, tag)"
+                >{{ tag.name }}</a
+              >
+            </span>
+            <span>{{ text }}</span>
           </p>
         </div>
       </div>

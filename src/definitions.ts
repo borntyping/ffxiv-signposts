@@ -80,10 +80,11 @@ export default [
   factory.category({
     name: "Disciples of War and Magic",
     tags: [
-      { id: "combat-guides", name: "Guides" },
       { id: "hunting", name: "Hunts" },
       { id: "hunting-log", name: "Hunting Log" },
       { id: "fates", name: "FATEs" },
+      { id: "pve-guide", name: "PvE Guides" },
+      { id: "pvp-guide", name: "PvP Guides" },
     ],
     cssClasses: ["is-danger", "is-light"],
   }),
@@ -110,10 +111,11 @@ export default [
   factory.category({
     name: "Golden Saucer",
     tags: [
-      { id: "fashion-report", name: "Fashion Report" },
-      { id: "triple-triad", name: "Triple Triad" },
       { id: "chocobo-racing", name: "Chocobo Racing" },
+      { id: "fashion-report", name: "Fashion Report" },
+      { id: "gates", name: "GATEs" },
       { id: "lord-of-verminion", name: "Lord of Verminion" },
+      { id: "triple-triad", name: "Triple Triad" },
     ],
     cssClasses: ["is-light", "is-warning"],
   }),
