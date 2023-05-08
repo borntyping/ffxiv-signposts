@@ -1,4 +1,5 @@
 <script lang="ts">
+import Tabs from "@/components/Tabs.vue";
 import { defineComponent } from "vue";
 import { Category, Tag, Signpost } from "@/types";
 import SignpostCard from "@/components/SignpostCard.vue";
@@ -29,18 +30,19 @@ export default defineComponent({
     };
   },
   watch: {
-    selectedCategory(value: Category, oldValue) {
+    selectedCategory(value: Category, _: Category): void {
       window.sessionStorage.setItem(CATEGORY, value.name);
     },
-    selectedTag(value: Tag, oldValue) {
+    selectedTag(value: Tag, _: Tag): void {
       window.sessionStorage.setItem(TAG, value.name);
     },
   },
   components: {
+    Tabs,
     SignpostCard,
   },
   methods: {
-    tab(category: Category, tag: Tag) {
+    switchTab(category: Category, tag: Tag) {
       this.selectedCategory = category;
       this.selectedTag = tag;
     },
@@ -57,36 +59,20 @@ export default defineComponent({
       </p>
     </div>
     <div class="hero-foot">
-      <div class="tabs is-boxed is-centered">
-        <ul>
-          <li
-            v-for="category in categories.filter((c) => !c.hide)"
-            :class="{ 'is-active': selectedCategory === category }"
-          >
-            <a @click="tab(category, category.tags[0])"
-              >{{ category.name }} ({{ category.signposts.length }})</a
-            >
-          </li>
-        </ul>
-      </div>
+      <Tabs
+        :callback="(t) => switchTab(t, t.tags[0])"
+        :tabs="categories"
+        :selected="selectedCategory"
+      />
     </div>
   </header>
   <header class="hero is-info" v-if="!selectedCategory.all">
     <div class="hero-foot">
-      <div class="tabs is-boxed is-centered">
-        <ul>
-          <li
-            :key="tag.name"
-            v-for="tag in selectedCategory.tags.filter((c) => !c.hide)"
-            :class="{ 'is-active': selectedTag === tag }"
-            style="margin-top: 0.5em"
-          >
-            <a @click="tab(selectedCategory, tag)"
-              >{{ tag.name }} ({{ tag.signposts.length }})</a
-            >
-          </li>
-        </ul>
-      </div>
+      <Tabs
+        :callback="(t) => switchTab(selectedCategory, t)"
+        :tabs="selectedCategory.tags"
+        :selected="selectedTag"
+      />
     </div>
   </header>
   <main class="section">
@@ -94,8 +80,8 @@ export default defineComponent({
       <TransitionGroup name="list">
         <div
           :key="signpost.name"
-          class="column is-6-desktop is-4-widescreen is-2-fullhd"
           v-for="signpost in selectedTag.signposts"
+          class="column is-6-desktop is-4-widescreen is-2-fullhd"
         >
           <SignpostCard :signpost="signpost" :categories="categories" />
         </div>

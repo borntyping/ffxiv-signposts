@@ -19,8 +19,8 @@ export interface Signposts {
   readonly signposts: Signpost[];
 }
 
+export interface Tab extends Required<PartialTab>, Signposts {}
 export interface Tag extends Required<PartialTag>, Signposts {}
-
 export interface Category extends Required<PartialCategory>, Signposts {
   readonly tags: Tag[];
 }
