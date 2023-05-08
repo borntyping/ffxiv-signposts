@@ -1,12 +1,18 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { OldCategory, Signpost } from "@/types";
+import { Category, Signpost } from "@/types";
 
 export default defineComponent({
   name: "SignpostCard",
   props: {
-    signpost: Object as PropType<Signpost>,
-    categories: Array as PropType<OldCategory[]>,
+    signpost: {
+      type: Object as PropType<Signpost>,
+      required: true
+    },
+    categories: {
+      type: Array as PropType<Category[]>,
+      required: true
+    },
   },
   computed: {
     tagsWithClasses() {
