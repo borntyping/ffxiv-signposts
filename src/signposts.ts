@@ -105,7 +105,7 @@ export default [
         text: "The most detailed fishing information available.",
       },
       { tags: ["sightseeing-log"], text: "Sightseeing log checklist." },
-      { tags: ["island-sanctuary"], text: "Workshop schedule planeer." },
+      { tags: ["island-sanctuary"], text: "Workshop schedule planner." },
     ],
     complexity: "medium",
   }),
@@ -526,5 +526,45 @@ export default [
       },
     ],
     complexity: "low",
+  }),
+  Signpost.create({
+    name: "FFXIV Lodestone News",
+    link: "https://lodestonenews.com",
+    desc: [
+      {
+        tags: ["events"],
+        text: "Third-party RSS feeds for Lodestone news.",
+      },
+    ],
+    complexity: "medium",
+  }),
+  Signpost.create({
+    name: "FFXIV Sanctuary",
+    link: "https://www.ffxiv-sanctuary.com",
+    desc: [
+      { tags: ["guide"], text: "Island Sanctuary guide." },
+      { tags: ["island-sanctuary"], text: "Animal tracker and gathering map." },
+    ],
+    complexity: "medium",
+  }),
+  Signpost.create({
+    name: "FFXIV Timers",
+    link: "https://borntyping.co.uk/ffxiv-timers/",
+    desc: [
+      { tags: ["weekly", "daily"], text: "Timer to next reset." },
+      { tags: ["ocean-fishing"], text: "Timer to next voyage." },
+    ],
+    complexity: "low",
+  }),
+  Signpost.create({
+    name: "Saddlebag Exchange",
+    link: "https://saddlebagexchange.com/",
+    desc: [
+      {
+        tags: ["marketboard"],
+        text: "Marketboard analysis tools.",
+      },
+    ],
+    complexity: "high",
   }),
 ];
